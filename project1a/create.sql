@@ -69,11 +69,9 @@ CREATE TABLE Review (
 );
 
 CREATE TABLE MaxPersonID (
-    id INT,
-    PRIMARY KEY (id)
+    id INT
 );
 
-CREATE TABLE MaxMovieId (
-    id INT,
-    PRIMARY KEY (id)
+CREATE TABLE MaxMovieID (
+    id INT
 );

@@ -5,7 +5,7 @@ CREATE TABLE Movie (
     rating VARCHAR(10),
     company VARCHAR(50),
     PRIMARY KEY (id)
-);
+) ENGINE = InnoDB;
 
 CREATE TABLE Actor (
     id INT,
@@ -15,14 +15,14 @@ CREATE TABLE Actor (
     dob DATE,
     dod DATE,
     PRIMARY KEY (id)
- );
+ ) ENGINE = InnoDB;
 
 CREATE TABLE Sales (
     mid INT,
     ticketsSold INT,
     totalIncome INT,
     PRIMARY KEY (mid)
- );
+ ) ENGINE = InnoDB;
 
 CREATE TABLE Director (
     id INT,
@@ -31,33 +31,31 @@ CREATE TABLE Director (
     dob DATE,
     dod DATE,
     PRIMARY KEY (id)
-);
+) ENGINE = InnoDB;
 
 CREATE TABLE MovieGenre (
     mid INT,
-    genre VARCHAR(20),
-    PRIMARY KEY (mid)
-);
+    genre VARCHAR(20)
+) ENGINE = InnoDB;
 
 CREATE TABLE MovieDirector (
     mid INT,
-    did INT,
-    PRIMARY KEY (mid)
-);
+    did INT
+) ENGINE = InnoDB;
 
 CREATE TABLE MovieActor (
     mid INT,
     aid INT,
     role VARCHAR(50),
     PRIMARY KEY (mid, aid)
-);
+) ENGINE = InnoDB;
 
 CREATE TABLE MovieRating (
     mid INT,
     imdb INT,
     rot INT,
     PRIMARY KEY (mid, imdb)
-);
+) ENGINE = InnoDB;
 
 CREATE TABLE Review (
     name VARCHAR(20),
@@ -66,12 +64,12 @@ CREATE TABLE Review (
     rating INT,
     comment VARCHAR(500),
     PRIMARY KEY (name, mid)
-);
+) ENGINE = InnoDB;
 
 CREATE TABLE MaxPersonID (
     id INT
-);
+) ENGINE = InnoDB;
 
 CREATE TABLE MaxMovieID (
     id INT
-);
+) ENGINE = InnoDB;

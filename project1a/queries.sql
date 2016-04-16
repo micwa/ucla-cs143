@@ -19,7 +19,7 @@ FROM Movie
 INNER JOIN Sales ON Movie.id = Sales.mid
 WHERE ticketsSold > 1000000;
 
--- Rank each year by average IMDb score of movies in that year, in descending order
+-- Rank each year by average IMDb score of movies in that year, in descending order (of IMDb score)
 SELECT year, AVG(imdb) AS IMDb FROM Movie
 INNER JOIN MovieRating ON Movie.id = MovieRating.mid
 GROUP BY year
@@ -28,5 +28,5 @@ ORDER BY IMDb DESC;
 -- Average tickets sold by genre
 SELECT genre, AVG(ticketsSold)
 FROM MovieGenre
-INNER JOIN Sales ON MovieGenre.mid = Sales.mid
+NATURAL JOIN Sales
 GROUP BY genre;

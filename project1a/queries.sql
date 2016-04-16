@@ -6,7 +6,6 @@ WHERE mid =
     (SELECT id FROM Movie
      WHERE title = 'Die Another Day');
 
-
 -- Count of all actors who have acted in multiple movies
 SELECT COUNT(*) FROM
     (SELECT aid FROM MovieActor

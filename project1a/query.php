@@ -14,7 +14,7 @@
     <p>Please do not run complex queries on the server or else.</p>
     <p>
         <form action="" method="GET">
-            <textarea name="query" cols="60" rows="8"></textarea><br />
+            <textarea name="query" cols="60" rows="8"><?php if (isset($_GET["query"])) echo $_GET["query"];?></textarea><br />
             <input type="submit" value="Submit" />
         </form>
 
@@ -32,28 +32,34 @@
 
         $sql = $_GET["query"];
         if (!$result = mysql_query($sql))
-            die("Error executing query.");
+            die("Error executing query: ". mysql_error());
 
+        // Print table with results
         echo "<h4>Results:</h4>";
-        $fields = array();
-        echo "<table border=1 cellspacing=1 cellpadding=2><br/>";
+        echo "<table border=1 cellspacing=1 cellpadding=2>\n";
         echo "<tr align=center>";
-        for($i=0; $i<mysql_num_fields($result); $i++){
-            $field = mysql_fetch_field($result,$i);
+        $fields = array();
+        for ($i = 0; $i < mysql_num_fields($result); $i++) {
+            $field = mysql_fetch_field($result, $i);
             $fields[$i] = $field->name;
             echo "<td><b>" . $field->name . "</b></td>";
         }
-        echo "</tr>";
+        echo "</tr>\n";
+
         while ($row = mysql_fetch_assoc($result)){
             echo "<tr align=center>";
-            for($j = 0; $j < count($fields); $j++){
-                echo "<td>" . $row[$fields[$j]] . "</td>";
+            for($i = 0; $i < count($fields); $i++){
+                $val = $row[$fields[$i]];
+                if (!is_null($val))
+                    echo "<td>" . $val . "</td>";
+                else
+                    echo "<td>N/A</td>";
             }
             echo "</tr>\n";
         }    
-        echo "</table>";
+        echo "</table>\n";
         mysql_free_result($result);
-        mysql_close($db_connection);
+        mysql_close($db);
         ?>
     </p>
  </body>

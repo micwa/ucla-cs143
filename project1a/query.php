@@ -34,7 +34,7 @@
             die("Error executing query: " . mysql_error());
 
         // Print table with results
-        echo "<h3>Results from MySQL:</h3>";
+        echo "<h3>Results from MySQL:</h3>\n";
         echo "<table border=1 cellspacing=1 cellpadding=2>\n";
         echo "<tr align=center>";
         for ($i = 0; $i < mysql_num_fields($result); $i++) {
@@ -43,9 +43,9 @@
         }
         echo "</tr>\n";
 
-        while ($row = mysql_fetch_row($result)){
+        while ($row = mysql_fetch_row($result)) {
             echo "<tr align=center>";
-            for ($i = 0; $i < mysql_num_fields($result); $i++){
+            for ($i = 0; $i < mysql_num_fields($result); $i++) {
                 $val = $row[$i];
                 if (is_null($val))
                     $val = "N/A";
@@ -58,5 +58,5 @@
         mysql_close($db);
         ?>
     </p>
- </body>
- </html>
+</body>
+</html>

@@ -13,8 +13,8 @@
     <hr />
 
     <?php
-        if (!isset($_GET["aid"]))
-            die("Nothing actor entered.");
+        if (!isset($_GET["aid"]) || $_GET["aid"] === "")
+            die("No actor entered.");
 
         $db = mysql_connect("localhost", "cs143", "");
         if (!$db)

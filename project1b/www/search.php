@@ -32,10 +32,10 @@
     for ($i = 0; $i < count($keywords) - 1; $i++)
     {
         $safe = mysql_real_escape_string($keywords[$i]);
-        $query .= " (first LIKE \"%" . $safe . "%\" OR last LIKE \"%" . $safe . "%\") AND";
+        $query .= " (first LIKE '%" . $safe . "%' OR last LIKE '%" . $safe . "%') AND";
     }
     $safe = mysql_real_escape_string($keywords[count($keywords) - 1]);
-    $query .= " (first LIKE \"%" . $safe . "%\" OR last LIKE \"%" . $safe . "%\")";
+    $query .= " (first LIKE '%" . $safe . "%' OR last LIKE '%" . $safe . "%')";
 
     if (!$result = mysql_query($query))
         die("Error executing query: " . mysql_error());

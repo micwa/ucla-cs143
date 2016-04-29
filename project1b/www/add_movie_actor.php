@@ -10,7 +10,6 @@
 
     if (isset($mid) && isset($aid) && isset($role) && $role !== "")
     {
-
         $db = mysql_connect("localhost", "cs143", "");
         if (!$db)
             die("Unable to connect to database: " . mysql_error());

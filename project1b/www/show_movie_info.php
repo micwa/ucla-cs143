@@ -35,9 +35,9 @@
     $row = mysql_fetch_assoc($result);
     echo "<h3> $row[title]</h3>\n";
     if (is_null($row[rating]))
-        echo "MPAA rating: N/A<br />\n";
+        echo "MPAA Rating: N/A<br />\n";
     else
-        echo "MPAA rating: $row[rating]<br />\n";
+        echo "MPAA Rating: $row[rating]<br />\n";
     if (is_null($row[company]))
         echo "Company: N/A<br />\n";
     else
@@ -45,28 +45,46 @@
 
     mysql_free_result($result);
 
-    // MovieActor info
+    // MovieGenre info
     $query = "SELECT genre FROM MovieGenre
               INNER JOIN Movie ON MovieGenre.mid = Movie.id
               WHERE mid=" . $mid;
     if (!$result = mysql_query($query))
         die("Error executing query: " . mysql_error());
+    echo "Genre: ";
+    while ($row = mysql_fetch_assoc($result)
+    {
+        echo "$genre ;"
+    }
+    echo " <br />\n";
 
-    echo "<table border=1 cellspacing=1 cellpadding=2>\n";
-    echo "<tr align=center>";
-    echo "<td><b>Movie</b></td>";
-    echo "<td><b>Role</b></td>";
-    echo "</tr>\n";
-    while ($row = mysql_fetch_assoc($result)) {
-        echo "<tr align=center>";
-        $mid = $row["mid"];
-        $role = $row["role"];
-        $title = $row["title"];
-        echo "<td><a href=\"./show_movie_info.php?mid=$mid\">$title</a></td>";
-        echo "<td>$role</td>";
-        echo "</tr>\n";
-    }    
-    echo "</table>\n";
+    echo "Genre: $genre <br />\n";
+    mysql_free_result($result);
+
+    //MovieActor info
+    $queryMA = "SELECT aid, role FROM MovieActor
+              INNER JOIN Movie ON MovieActor.mid = Movie.id
+              WHERE mid=" . $mid;
+    if (!$resultMA = mysql_query($queryMA))
+        die("Error executing query: " . mysql_error());
+    while ($rowMA = mysql_fetch_assoc($resultMA)){
+        $aid = $rowMA["aid"];
+        $role = $rowMA["role"];
+        $queryA = "SELECT first,last FROM Actor WHERE id=" . $aid;
+        if (!$resultA = mysql_query($queryA))
+            die("Error executing query: " . mysql_error());
+        $rowA = mysql_fetch_assoc($resultA);
+        echo "$rowA[first] $rowA[last] act as '$role'";
+    }
+
+
+    mysql_free_result($resultMA);
+    mysql_free_result($resultA);
+
+
+
+       
+   
 
     mysql_free_result($result);
     mysql_close($db);

@@ -7,7 +7,7 @@
     $mid = $_POST["mid"];
     $did = $_POST["did"];
 
-    if (isset($mid) && isset($did))
+    if ($_SERVER["REQUEST_METHOD"] === "POST" && !empty($mid) && !empty($did))
     {
         $db = mysql_connect("localhost", "cs143", "");
         if (!$db)

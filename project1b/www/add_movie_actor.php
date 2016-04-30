@@ -8,7 +8,7 @@
     $aid = $_POST["aid"];
     $role = $_POST["role"];
 
-    if (isset($mid) && isset($aid) && isset($role) && $role !== "")
+    if ($_SERVER["REQUEST_METHOD"] === "POST" && !empty($mid) && !empty($aid) && !empty($role))
     {
         $db = mysql_connect("localhost", "cs143", "");
         if (!$db)

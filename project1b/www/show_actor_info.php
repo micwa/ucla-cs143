@@ -37,7 +37,7 @@
     echo "<h3> $row[first] $row[last]</h3>\n";
     echo "Sex: $row[sex]<br />\n";
     echo "Date of birth: $row[dob]<br />\n";
-    if (is_null($row["dod"]))
+    if (is_null($row[dod]))
         echo "Date of death: N/A<br />\n";
     else
         echo "Date of death: $row[dod]<br />\n";

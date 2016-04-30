@@ -34,7 +34,9 @@
         die("No movie with mid=$mid found.");
 
     $row = mysql_fetch_assoc($result);
-    echo "<h3> $row[title]</h3>\n";
+    $title = $row["title"];
+    $year = $row["year"];
+    echo "<h3>$title ($year)</h3>\n";
     if (is_null($row["rating"]))
         echo "MPAA Rating: N/A<br />\n";
     else
@@ -120,7 +122,7 @@
     }    
     echo "</table>\n";
     mysql_free_result($resultMA);
-    echo "<hr> \n";
+    echo "<hr>\n";
 
     // All reviews
     $query = "SELECT avg(rating), count(rating) FROM Review

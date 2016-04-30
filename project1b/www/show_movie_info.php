@@ -119,24 +119,35 @@
     mysql_free_result($resultMA);
     echo "<hr> \n";
 
-    // $query = "SELECT name,time,rating,comment FROM Review
-    //        WHERE mid=" . $mid;
-    // if(!$result = mysql_query($query))
-    //     die("Error executing query: " . mysql_error());
-    // $row = mysql_fetch_assoc($result);
-    //INCOMPLETE
-    //FIND THE AVERAGE
-    //$avgrat =
-    //$countrat =
-    //echo "Average Score: $avgrat/5 by $countrat reviews(s).";
-    // $name = $row["name"];
-    // $time = "$row[time]";
-    // $rating = "$row[rating]";
-    // $comment = "$row[comment]";
-    // echo "$name";
-    // echo "$time";
-    // mysql_free_result($result);
+    $query = "SELECT avg(rating), count(rating) FROM Review
+           WHERE mid=" . $mid;
+    if(!$result = mysql_query($query))
+        die("Error executing query: " . mysql_error());
+     $row = mysql_fetch_row($result);
+    $avgrat = $row[0];
+    $countrat = $row[1];
+     if (is_null($row[0]))
+        echo "Average Score: N/A. \n";
+    else
+        echo "Average Score: $avgrat/5 by $countrat review(s). \n";
+    mysql_free_result($result);
 
+    $query = "SELECT name, time, rating, comment FROM Review
+           WHERE mid=" . $mid;
+    if(!$result = mysql_query($query))
+        die("Error executing query: " . mysql_error());
+    $row = mysql_fetch_assoc($result);
+    echo "<a href=\"./add_review.php?mid=$mid\">Add Review Here!</a><br/>\n";
+    echo "All Comments Displayed With Details:";
+    while ($row = mysql_fetch_assoc($result)) {
+        $name = $row["name"];
+        $time = $row["time"];
+        $rating = $row["rating"];
+        $comment = $row["comment"];
+        echo "$name rated this movie $time, a score of $rating stars. The rater said <br/> \n";
+        echo "'$comment'";
+    }
+    mysql_free_result($result);
     mysql_close($db);
     ?>
 </body>

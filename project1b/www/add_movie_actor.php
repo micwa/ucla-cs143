@@ -27,7 +27,6 @@
         if (!$result = mysql_query($query))
             die("Error executing query: " . mysql_error());
 
-        mysql_free_result($result);
         mysql_close($db);
 
         echo "Added actor with id=$aid (role of \"$role\") to movie with id=$mid.\n";

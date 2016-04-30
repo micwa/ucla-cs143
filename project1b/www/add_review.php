@@ -40,7 +40,10 @@
             $title = $row["title"];
             $year = $row["year"];
             $mid = $row["id"];
-            echo "<option value=\"$mid\">$title ($year)</option>\n";
+            if (!empty($_GET["mid"]) && $mid === $_GET["mid"])
+                echo "<option value=\"$mid\" selected>$title ($year)</option>\n";
+            else
+                echo "<option value=\"$mid\">$title ($year)</option>\n";
         }    
         echo "</select><br />\n";
         mysql_free_result($result);

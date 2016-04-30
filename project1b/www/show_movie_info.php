@@ -136,10 +136,10 @@
     mysql_free_result($result);
 
     $query = "SELECT name, time, rating, comment FROM Review
-           WHERE mid=" . $mid;
+           WHERE mid=" . $mid . " ORDER BY time DESC";
     if(!$result = mysql_query($query))
         die("Error executing query: " . mysql_error());
-    $row = mysql_fetch_assoc($result);
+
     echo "<a href=\"./add_review.php?mid=$mid\">Add Review Here!</a><br/>\n";
     echo "All Comments Displayed With Details:";
     while ($row = mysql_fetch_assoc($result)) {
@@ -148,7 +148,7 @@
         $rating = $row["rating"];
         $comment = $row["comment"];
         echo "<br/><br/>\n";
-        echo "$name rated this movie $time, a score of $rating stars. The rater said <br/> \n";
+        echo "On $time, <b>$name</b> rated this movie a score of $rating stars. The rater said: <br/>\n";
         echo "$comment\n";
     }
     mysql_free_result($result);

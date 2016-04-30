@@ -67,6 +67,7 @@
     // MovieGenre info
     $query = "SELECT genre FROM MovieGenre
               WHERE mid=" . $mid;
+    $query .= " ORDER BY genre ASC";
     if (!$result = mysql_query($query))
         die("Error executing query: " . mysql_error());
     $genres = "Genre: ";

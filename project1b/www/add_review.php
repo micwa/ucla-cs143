@@ -62,7 +62,7 @@
         Comments: <br/>
         <textarea name="comment" cols="80" rows="10"></textarea>
         <br/>
-        <input type="submit" value="Rate movie"/>
+        <input type="submit" value="Add review"/>
     </form>
 </body>
 </html>

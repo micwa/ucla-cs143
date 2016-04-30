@@ -44,7 +44,7 @@
             die("Unable to select database: " . mysql_error());
 
         // All movies
-        $query = "SELECT * FROM Movie";
+        $query = "SELECT * FROM Movie ORDER BY title ASC";
         if (!$result = mysql_query($query))
             die("Error executing query: " . mysql_error());
 

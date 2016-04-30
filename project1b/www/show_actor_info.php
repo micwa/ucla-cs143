@@ -45,9 +45,10 @@
     mysql_free_result($result);
 
     // MovieActor info
-    $query = "SELECT mid, role, title FROM MovieActor
+    $query = "SELECT mid, role, title, year FROM MovieActor
               INNER JOIN Movie ON MovieActor.mid = Movie.id
               WHERE aid=" . $aid;
+    $query .= " ORDER BY year ASC";
     if (!$result = mysql_query($query))
         die("Error executing query: " . mysql_error());
 
@@ -62,7 +63,8 @@
         $mid = $row["mid"];
         $role = $row["role"];
         $title = $row["title"];
-        echo "<td><a href=\"./show_movie_info.php?mid=$mid\">$title</a></td>";
+        $year = $row["year"];
+        echo "<td><a href=\"./show_movie_info.php?mid=$mid\">$title ($year)</a></td>";
         echo "<td>$role</td>";
         echo "</tr>\n";
     }    

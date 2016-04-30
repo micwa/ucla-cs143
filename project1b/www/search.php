@@ -36,6 +36,7 @@
     }
     $safe = mysql_real_escape_string($keywords[count($keywords) - 1]);
     $query .= " (first LIKE '%" . $safe . "%' OR last LIKE '%" . $safe . "%')";
+    $query .= " ORDER BY first";
 
     if (!$result = mysql_query($query))
         die("Error executing query: " . mysql_error());
@@ -63,6 +64,7 @@
     }
     $safe = mysql_real_escape_string($keywords[count($keywords) - 1]);
     $query .= " (title LIKE \"%" . $safe . "%\")";
+    $query .= " ORDER BY title";
 
     if (!$result = mysql_query($query))
         die("Error executing query: " . mysql_error());

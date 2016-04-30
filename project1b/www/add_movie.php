@@ -175,10 +175,8 @@
         <input type="checkbox" name="genre_Thriller" value="Thriller">Thriller</input>
         <input type="checkbox" name="genre_War" value="War">War</input>
         <input type="checkbox" name="genre_Western" value="Western">Western</input>
-        <br/>
-    <input type="submit" value="Add movie"/>
-</form>
-<hr/>
-
+        <br/><br/>
+        <input type="submit" value="Add movie"/>
+    </form>
 </body>
 </html>

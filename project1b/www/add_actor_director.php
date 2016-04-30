@@ -11,7 +11,7 @@
     $identity = $_POST["identity"];
     $sex = $_POST["sex"];
 
-    if ($_SERVER["REQUEST_METHOD"] === "POST" && !empty($first) && !empty($last) && !empty($dob))
+    if ($_SERVER["REQUEST_METHOD"] === "POST" && !empty($first) && !empty($last) && !empty($dob) && !empty($identity))
     {
         $db = mysql_connect("localhost", "cs143", "");
         if (!$db)

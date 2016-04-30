@@ -79,6 +79,21 @@
     echo "$genres<br /> \n";
     mysql_free_result($result);
 
+    $query = "SELECT imdb,rot FROM MovieRating
+           WHERE mid=" . $mid;
+    if(!$result = mysql_query($query))
+        die("Error executing query: " . mysql_error());
+    $row = mysql_fetch_assoc($result);
+     if (is_null($row["imdb"]))
+        echo "IMDB Rating: N/A<br />\n";
+    else
+        echo "IMDB Rating: $row[imdb]/100<br />\n";
+    if (is_null($row["rot"]))
+        echo "Rotten Tomatoes Rating: N/A<br />\n";
+    else
+        echo "Rotten Tomatoes Rating: $row[rot]/100<br />\n";
+    mysql_free_result($result);
+
     //MovieActor info
     $queryMA = "SELECT aid, role, first, last FROM MovieActor
               INNER JOIN Actor ON MovieActor.aid = Actor.id
@@ -93,7 +108,7 @@
     echo "</tr>\n";
     while ($row = mysql_fetch_assoc($resultMA)) {
         echo "<tr align=center>";
-        $aid = "$row[aid]";
+        $aid = $row["aid"];
         $name = "$row[first] $row[last]";
         $role = $row["role"];
         echo "<td><a href=\"./show_actor_info.php?aid=$aid\">$name</a></td>";
@@ -103,6 +118,25 @@
     echo "</table>\n";
     mysql_free_result($resultMA);
     echo "<hr> \n";
+
+    // $query = "SELECT name,time,rating,comment FROM Review
+    //        WHERE mid=" . $mid;
+    // if(!$result = mysql_query($query))
+    //     die("Error executing query: " . mysql_error());
+    // $row = mysql_fetch_assoc($result);
+    //INCOMPLETE
+    //FIND THE AVERAGE
+    //$avgrat =
+    //$countrat =
+    //echo "Average Score: $avgrat/5 by $countrat reviews(s).";
+    // $name = $row["name"];
+    // $time = "$row[time]";
+    // $rating = "$row[rating]";
+    // $comment = "$row[comment]";
+    // echo "$name";
+    // echo "$time";
+    // mysql_free_result($result);
+
     mysql_close($db);
     ?>
 </body>

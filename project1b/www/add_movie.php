@@ -4,30 +4,122 @@
 </head>
 <body>
 	<?php
-	$id = $_POST["id"];
 	$title = $_POST["title"];
 	$year = $_POST["year"];
 	$rating = $_POST["rating"];
+	$imdb = $_POST["imdb"];
+	$rot = $_POST["rot"];
 	$company = $_POST["company"];
 
-	?>
+	if($_SERVER["REQUEST_METHOD"] === "POST" && !empty($title) && !empty($year))
+	{
+		$db = mysql_connect("localhost", "cs143", "");
+		if(!$db)
+			die("Unable to connect database: " . mysql_error());
+
+		$db_selected = mysql_select_db("CS143", $db);
+		if(!$db_selected)
+			die("Unable to select databse: " . mysql_error());
+
+		$id = (int) $id;
+		$title = "'" . mysql_real_escape_string($title) . "'";
+		$year = (int) $year;
+		if (!empty($rating))
+            $rating = "'" . mysql_real_escape_string($rating) . "'";
+        else
+            $rating = "NULL";
+        if( !empty($imdb))
+        	$imdb = (int) $imdb;
+        else
+        	$imdb = "NULL";
+        if( !empty($rot))
+        	$rot = (int) $rot;
+        else
+        	$rot = "NULL";
+        if (!empty($company))
+            $company = "'" . mysql_real_escape_string($company) . "'";
+        else
+            $company= "NULL";
+
+        //Get id
+        $query = "SELECT id from MaxMovieID";
+        if (!$result = mysql_query($query))
+        	die("Error executing query: ". mysql_error());
+        $row = mysql_fetch_assoc($result);
+        $old_id = $row["id"];
+        $id = $old_id + 1;
+        mysql_free_result($result);
 
 
-	
+        //START TRANSACTION
+        mysql_query("START TRANSACTION");
+        $commit = true;
+        $query = "UPDATE MaxMovieID SET id=$id WHERE id=$old_id";
+        if(!$result = mysql_query($query))
+        	$commit = false;
+
+        //INSERT INTO MOVIE TABLE
+        $query = "INSERT INTO Movie (id, title, year, rating, company) VALUES (";
+        $query .= "$id, $title, $year, $rating, $company)";
+        if (!$result = mysql_query($query))
+        	$commit = false;
+
+        $genreOptions = ["Action", "Adult", "Adventure", "Animation", "Comedy", "Crime", "Documentary",
+        "Drama", "Family", "Fantasy", "Horror", "Musical", "Mystery", "Romance", "Sci-Fi", "Short", "Thriller", "War", "Western" ];
+        for($i = 0; $i < count($genreOptions); $i++)
+        {
+        	$genre = $genreOptions[$i];
+        	if (isset($_POST["genre_" . $genre]))
+        	{
+        		$query = "INSERT INTO MovieGenre (mid,genre) VALUES (";
+        		$query .= "$id, '$genre')";
+				if (!$result = mysql_query($query))
+        			$commit = false;
+        	} 
+        }
+
+        $query = "INSERT INTO MovieRating (mid, imdb, rot) VALUES (";
+        $query .= "$id, $imdb, $rot)";
+        if (!$result = mysql_query($query))
+        	$commit = false;
+
+
+        //COMMit/ROLLBACK TRANSACTION
+        if($commit)
+        {
+			echo "Added $title (id=$id) to the database.\n";
+            echo "<hr />\n";
+            mysql_query("COMMIT");
+        } 
+        else
+        {
+        	echo "Error adding $title to the database.";
+            echo "<hr />\n";
+            mysql_query("ROLLBACK");
+        }
+        mysql_close($db);
+    }
+    else if ($_SERVER["REQUEST_METHOD"] === "POST")
+    {
+    	echo "Must input at least a title and year. \n";
+    	echo "<hr/>\n";
+    }
+    ?>
 	Add new movie: <br/>
-	<form action="" method="GET">			
+	<form action="" method="POST">			
 		Title : <input type="text" name="title" maxlength="20"><br/>
-		Compnay: <input type="text" name="company" maxlength="50"><br/>
+		Company: <input type="text" name="company" maxlength="50"><br/>
 		Year : <input type="text" name="year" maxlength="4"><br/>	<!-- Todo: validation-->	
-		MPAA Rating : <select name="mpaarating">
+		MPAA Rating : <select name="rating">
 		<option value="G">G</option>
 		<option value="NC-17">NC-17</option>
 		<option value="PG">PG</option>
 		<option value="PG-13">PG-13</option>
 		<option value="R">R</option>
 		<option value="surrendere">surrendere</option>
-	</select>
-	<br/>
+	</select><br/>
+		IMDB Rating : <input type="text" name="imdb" maxlength="3"><br/>
+		Rotten Tomatoes Rating : <input type="text" name="rot" maxlength="3"><br/>
 	Genre : 
 	<input type="checkbox" name="genre_Action" value="Action">Action</input>
 	<input type="checkbox" name="genre_Adult" value="Adult">Adult</input>
@@ -51,7 +143,7 @@
 	
 	<br/>
 	
-	<input type="submit" value="Add it!!"/>
+	<input type="submit" value="Add it!"/>
 </form>
 <hr/>
 

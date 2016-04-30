@@ -12,14 +12,14 @@
     $rot = $_POST["rot"];
     $company = $_POST["company"];
 
-    if($_SERVER["REQUEST_METHOD"] === "POST" && !empty($title) && !empty($did) && !empty($year))
+    if ($_SERVER["REQUEST_METHOD"] === "POST" && !empty($title) && !empty($did) && !empty($year))
     {
         $db = mysql_connect("localhost", "cs143", "");
-        if(!$db)
+        if (!$db)
             die("Unable to connect database: " . mysql_error());
 
         $db_selected = mysql_select_db("CS143", $db);
-        if(!$db_selected)
+        if (!$db_selected)
             die("Unable to select databse: " . mysql_error());
 
         $id = (int) $id;
@@ -30,11 +30,11 @@
             $rating = "'" . mysql_real_escape_string($rating) . "'";
         else
             $rating = "NULL";
-        if( !empty($imdb))
+        if (!empty($imdb))
             $imdb = (int) $imdb;
         else
             $imdb = "NULL";
-        if( !empty($rot))
+        if (!empty($rot))
             $rot = (int) $rot;
         else
             $rot = "NULL";
@@ -44,7 +44,7 @@
             $company= "NULL";
 
         // Get id
-        $query = "SELECT id from MaxMovieID";
+        $query = "SELECT id FROM MaxMovieID";
         if (!$result = mysql_query($query))
             die("Error executing query: ". mysql_error());
         $row = mysql_fetch_assoc($result);
@@ -56,7 +56,7 @@
         mysql_query("START TRANSACTION");
         $commit = true;
         $query = "UPDATE MaxMovieID SET id=$id WHERE id=$old_id";
-        if(!$result = mysql_query($query))
+        if (!$result = mysql_query($query))
             $commit = false;
 
         // Insert Movie
@@ -72,9 +72,10 @@
             $commit = false;
 
         // Insert MovieGenre
-        $genreOptions = ["Action", "Adult", "Adventure", "Animation", "Comedy", "Crime", "Documentary",
-        "Drama", "Family", "Fantasy", "Horror", "Musical", "Mystery", "Romance", "Sci-Fi", "Short", "Thriller", "War", "Western" ];
-        for($i = 0; $i < count($genreOptions); $i++)
+        $genreOptions = ["Action", "Adult", "Adventure", "Animation", "Comedy", "Crime",
+            "Documentary", "Drama", "Family", "Fantasy", "Horror", "Musical",
+            "Mystery", "Romance", "Sci-Fi", "Short", "Thriller", "War", "Western"];
+        for ($i = 0; $i < count($genreOptions); $i++)
         {
             $genre = $genreOptions[$i];
             if (isset($_POST["genre_" . $genre]))
@@ -93,7 +94,7 @@
             $commit = false;
 
         // COMMIT/ROLLBACK TRANSACTION
-        if($commit)
+        if ($commit)
         {
             echo "Added $title (id=$id) to the database.\n";
             echo "<hr />\n";

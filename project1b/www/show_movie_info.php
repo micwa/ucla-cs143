@@ -26,6 +26,7 @@
 
     $mid = (int) $_GET["mid"];
 
+    // Movie info
     $query = "SELECT * FROM Movie WHERE id=" . $mid;
     if (!$result = mysql_query($query))
         die("Error executing query: " . mysql_error());
@@ -44,6 +45,7 @@
         echo "Company: $row[company]<br />\n";
     mysql_free_result($result);
 
+    // Movie director
     $query = "SELECT * FROM MovieDirector
     INNER JOIN Director ON Director.id = MovieDirector.did
     WHERE mid=" . $mid;
@@ -58,10 +60,9 @@
     }
     $row = mysql_fetch_assoc($result);
     $name = "$row[first] $row[last]";
-    $directors .= "$name<br />\n";
-    echo "$directors";
+    $directors .= $name;
+    echo "$directors<br />\n";
     mysql_free_result($result);
-
 
     // MovieGenre info
     $query = "SELECT genre FROM MovieGenre
@@ -75,10 +76,11 @@
         $genres .= "$row[genre], ";
     }
     $row = mysql_fetch_assoc($result);
-    $genres .= "$row[genre]";
+    $genres .= $row["genre"];
     echo "$genres<br /> \n";
     mysql_free_result($result);
 
+    // MovieRating info
     $query = "SELECT imdb,rot FROM MovieRating
            WHERE mid=" . $mid;
     if(!$result = mysql_query($query))
@@ -94,7 +96,7 @@
         echo "Rotten Tomatoes Rating: $row[rot]/100<br />\n";
     mysql_free_result($result);
 
-    //MovieActor info
+    // MovieActor info
     $queryMA = "SELECT aid, role, first, last FROM MovieActor
               INNER JOIN Actor ON MovieActor.aid = Actor.id
               WHERE mid=" . $mid;
@@ -119,6 +121,7 @@
     mysql_free_result($resultMA);
     echo "<hr> \n";
 
+    // All reviews
     $query = "SELECT avg(rating), count(rating) FROM Review
            WHERE mid=" . $mid;
     if(!$result = mysql_query($query))
@@ -126,7 +129,7 @@
      $row = mysql_fetch_row($result);
     $avgrat = $row[0];
     $countrat = $row[1];
-     if (is_null($row[0]))
+     if (is_null($avgrat))
         echo "Average Score: N/A. \n";
     else
         echo "Average Score: $avgrat/5 by $countrat review(s). \n";
@@ -144,8 +147,9 @@
         $time = $row["time"];
         $rating = $row["rating"];
         $comment = $row["comment"];
+        echo "<br/><br/>\n";
         echo "$name rated this movie $time, a score of $rating stars. The rater said <br/> \n";
-        echo "'$comment'";
+        echo "$comment\n";
     }
     mysql_free_result($result);
     mysql_close($db);

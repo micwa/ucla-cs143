@@ -65,12 +65,6 @@
         if (!$result = mysql_query($query))
             $commit = false;
 
-        // Insert MovieDirector
-        $query = "INSERT INTO MovieDirector (mid, did) VALUES (";
-        $query .= "$id, $did)";
-        if (!$result = mysql_query($query))
-            $commit = false;
-
         // Insert MovieGenre
         $genreOptions = ["Action", "Adult", "Adventure", "Animation", "Comedy", "Crime",
             "Documentary", "Drama", "Family", "Fantasy", "Horror", "Musical",
@@ -118,31 +112,6 @@
     <form action="" method="POST">			
         Title: <input type="text" name="title" maxlength="20"><br/>
         Year: <input type="text" name="year" maxlength="4"><br/>
-        <?php
-        $db = mysql_connect("localhost", "cs143", "");
-        if (!$db)
-            die("Unable to connect to database: " . mysql_error());
-
-        $db_selected = mysql_select_db("CS143", $db);
-        if (!$db_selected)
-            die("Unable to select database: " . mysql_error());
-
-        // All directors
-        $query = "SELECT * FROM Director ORDER BY last ASC";
-        if (!$result = mysql_query($query))
-            die("Error executing query: " . mysql_error());
-
-        echo "Director: <select name=\"did\">\n";
-        while ($row = mysql_fetch_assoc($result)) {
-            $name = "$row[last], $row[first]";
-            $aid = $row["id"];
-            echo "<option value=\"$aid\">$name</option>\n";
-        }    
-        echo "</select><br />\n";
-
-        mysql_free_result($result);
-        mysql_close($db);
-        ?>
         Company: <input type="text" name="company" maxlength="50"><br/>
         <br/>
         MPAA Rating: <select name="rating">

@@ -32,6 +32,11 @@
         echo "Added actor with id=$aid (role of \"$role\") to movie with id=$mid.\n";
         echo "<hr />\n";
     }
+    else if ($_SERVER["REQUEST_METHOD"] === "POST")
+    {
+        echo "No role specified.\n";
+        echo "<hr />\n";
+    }
     ?>
 
     Add an actor's role in a movie:<br /><br />

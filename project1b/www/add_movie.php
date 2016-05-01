@@ -106,13 +106,13 @@
         // COMMIT/ROLLBACK TRANSACTION
         if ($commit)
         {
-            echo "Added $title (id=$id) to the database.\n";
+            echo "Added a movie to the database.\n";
             echo "<hr />\n";
             mysql_query("COMMIT");
         } 
         else
         {
-            echo "Error adding $title to the database.";
+            echo "Error adding a movie to the database.";
             echo "<hr />\n";
             mysql_query("ROLLBACK");
         }

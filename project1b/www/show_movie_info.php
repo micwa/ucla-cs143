@@ -168,6 +168,11 @@
         $time = $row["time"];
         $rating = $row["rating"];
         $comment = $row["comment"];
+        if (empty($rating))
+            $rating = "n/a";
+        if (empty($comment))
+            $comment = "";
+
         echo "<br/><br/>\n";
         echo "On $time, <b>$name</b> rated this movie a score of $rating star(s). The rater said: <br/>\n";
         echo "$comment\n";

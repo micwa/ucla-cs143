@@ -2,6 +2,11 @@
 <head>
     <title>CS143 - Project 1B - Show actor info</title>
     <link href="./bootstrap.min.css" rel="stylesheet">
+    <style>
+    table, td, th {
+        border: 1px solid black;
+    }
+    </style>
 </head>
 <body style="background-color:lightblue">
     <!-- Search for actors/movies -->
@@ -52,8 +57,12 @@
     if (!$result = mysql_query($query))
         die("Error executing query: " . mysql_error());
 
+    echo "<br />";
     echo "<h4>Has acted in:</h4>\n";
-    echo "<table border=1 cellspacing=1 cellpadding=2>\n";
+    echo "<div class=\"row\">\n";
+    echo "<div class=\"col-md-3\"></div>\n";
+    echo "<div class=\"col-md-6\">\n";
+    echo "<table class=\"table\">\n";
     echo "<tr align=center>";
     echo "<td><b>Movie</b></td>";
     echo "<td><b>Role</b></td>";
@@ -69,6 +78,9 @@
         echo "</tr>\n";
     }    
     echo "</table>\n";
+    echo "</div>\n";
+    echo "<div class=\"col-md-3\"></div>\n";
+    echo "</div>\n";
 
     mysql_free_result($result);
     mysql_close($db);

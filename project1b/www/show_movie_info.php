@@ -2,6 +2,11 @@
 <head>
     <title>CS143 - Project 1B - Show movie info</title>
     <link href="./bootstrap.min.css" rel="stylesheet">
+    <style>
+    table, td, th {
+        border: 1px solid black;
+    }
+    </style>
 </head>
 <body style="background-color:lightblue">
     <!-- Search for actors/movies -->
@@ -82,6 +87,7 @@
     echo "$genres<br /> \n";
     mysql_free_result($result);
 
+    echo "<br />";
     echo "<h4>More info:</h4>\n";
 
     // MovieRating info
@@ -123,8 +129,12 @@
               WHERE mid=" . $mid;
     if (!$resultMA = mysql_query($queryMA))
         die("Error executing query: " . mysql_error());
+    echo "<br />";
     echo "<h4>Cast:</h4>\n";
-    echo "<table border=1 cellspacing=1 cellpadding=2>\n";
+    echo "<div class=\"row\">\n";
+    echo "<div class=\"col-md-3\"></div>\n";
+    echo "<div class=\"col-md-6\">\n";
+    echo "<table class=\"table\">\n";
     echo "<tr align=center>";
     echo "<td><b>Actor </b></td>";
     echo "<td><b>Role</b></td>";
@@ -139,6 +149,9 @@
         echo "</tr>\n";
     }    
     echo "</table>\n";
+    echo "</div>\n";
+    echo "<div class=\"col-md-3\"></div>\n";
+    echo "</div>\n";
     mysql_free_result($resultMA);
     echo "<hr>\n";
 

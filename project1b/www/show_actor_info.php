@@ -3,13 +3,12 @@
     <title>CS143 - Project 1B - Show actor info</title>
     <link href="./bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
+<body style="background-color:lightblue">
     <!-- Search for actors/movies -->
-    Search for actors/movies
     <form action="./search.php" method="GET">
-        Search:
+        Search for actors/movies:
         <input type="text" name="keyword" />
-        <input type="submit" value="Search" />
+        <input class="btn btn-default" type="submit" value="Search" />
     </form>
     <hr />
 

@@ -44,7 +44,6 @@
         echo "<h4>No matching actors found.</h4>\n";
     else
         echo "<h4>Found actors:</h4>\n";
-    //echo "$query<br/>";
 
     while ($row = mysql_fetch_assoc($result))
     {
@@ -72,7 +71,6 @@
         echo "<h4>No matching movies found.</h4>\n";
     else
         echo "<h4>Found movies:</h4>\n";
-    //echo "$query<br/>";
 
     while ($row = mysql_fetch_assoc($result))
     {

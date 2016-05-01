@@ -3,7 +3,7 @@
 	<title>CS143 - Project 1B - Add movie</title>
     <link href="./bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
+<body style="background-color:#add8e6">
     <?php
     $title = $_POST["title"];
     $did = $_POST["did"];

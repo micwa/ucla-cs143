@@ -3,7 +3,7 @@
     <title>CS143 - Project 1B - Add actor/director</title>
     <link href="./bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
+<body style="background-color:#add8e6">
     <?php
     $first = $_POST["first"];
     $last = $_POST["last"];

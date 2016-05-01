@@ -3,7 +3,7 @@
     <title>CS143 - Project 1B - Add review</title>
     <link href="./bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
+<body style="background-color:#add8e6">
     <?php
     $mid = $_POST["mid"];
     $name = $_POST["name"];

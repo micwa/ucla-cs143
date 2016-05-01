@@ -8,11 +8,13 @@
     $did = $_POST["did"];
     $year = $_POST["year"];
     $rating = $_POST["rating"];
+    $company = $_POST["company"];
     $imdb = $_POST["imdb"];
     $rot = $_POST["rot"];
-    $company = $_POST["company"];
+    $tickets = $_POST["tickets"];
+    $income = $_POST["income"];
 
-    if ($_SERVER["REQUEST_METHOD"] === "POST" && !empty($title) && !empty($did) && !empty($year))
+    if ($_SERVER["REQUEST_METHOD"] === "POST" && !empty($title) && !empty($year))
     {
         $db = mysql_connect("localhost", "cs143", "");
         if (!$db)
@@ -30,6 +32,10 @@
             $rating = "'" . mysql_real_escape_string($rating) . "'";
         else
             $rating = "NULL";
+        if (!empty($company))
+            $company = "'" . mysql_real_escape_string($company) . "'";
+        else
+            $company= "NULL";
         if (!empty($imdb))
             $imdb = (int) $imdb;
         else
@@ -38,10 +44,6 @@
             $rot = (int) $rot;
         else
             $rot = "NULL";
-        if (!empty($company))
-            $company = "'" . mysql_real_escape_string($company) . "'";
-        else
-            $company= "NULL";
 
         // Get id
         $query = "SELECT id FROM MaxMovieID";
@@ -87,6 +89,15 @@
         if (!$result = mysql_query($query))
             $commit = false;
 
+        // Insert Sales (if any)
+        if (!empty($tickets) && !empty($totalIncome))
+        {
+            $query = "INSERT INTO Sales (mid, ticketsSold, totalIncome) VALUES (";
+            $query .= "$id, $tickets, $income)";
+            if (!$result = mysql_query($query))
+                $commit = false;
+        }
+
         // COMMIT/ROLLBACK TRANSACTION
         if ($commit)
         {
@@ -104,7 +115,7 @@
     }
     else if ($_SERVER["REQUEST_METHOD"] === "POST")
     {
-        echo "Must input at least a title, year, and director. \n";
+        echo "Must input at least a title and year. \n";
         echo "<hr/>\n";
     }
     ?>
@@ -122,8 +133,6 @@
             <option value="R">R</option>
             <option value="surrendere">surrendere</option>
         </select><br/>
-        IMDB Rating: <input type="text" name="imdb" maxlength="3"><br/>
-        Rotten Tomatoes Rating: <input type="text" name="rot" maxlength="3"><br/>
         Genre: 
         <input type="checkbox" name="genre_Action" value="Action">Action</input>
         <input type="checkbox" name="genre_Adult" value="Adult">Adult</input>
@@ -145,6 +154,12 @@
         <input type="checkbox" name="genre_War" value="War">War</input>
         <input type="checkbox" name="genre_Western" value="Western">Western</input>
         <br/><br/>
+        (Optional)<br/>
+        IMDB Rating: <input type="text" name="imdb" maxlength="3"><br/>
+        Rotten Tomatoes Rating: <input type="text" name="rot" maxlength="3"><br/>
+        Tickets Sold: <input type="text" name="tickets" maxlength="11"><br/>
+        Total Income: <input type="text" name="income" maxlength="11"><br/>
+        <br/>
         <input type="submit" value="Add movie"/>
     </form>
 </body>

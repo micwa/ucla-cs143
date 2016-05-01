@@ -8,7 +8,7 @@
     <!-- Search for actors/movies -->
     <div class="jumbotron">
         <h1>CS143 Project 1B</h1>
-        <p>Have you ever seen something so beautiful?</p>
+        Have you ever seen something so beautiful?
     </div>
     <form action="./search.php" method="GET">
         Search for actors/movies:

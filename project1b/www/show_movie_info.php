@@ -169,7 +169,7 @@
         $rating = $row["rating"];
         $comment = $row["comment"];
         echo "<br/><br/>\n";
-        echo "On $time, <b>$name</b> rated this movie a score of $rating stars. The rater said: <br/>\n";
+        echo "On $time, <b>$name</b> rated this movie a score of $rating star(s). The rater said: <br/>\n";
         echo "$comment\n";
     }
     mysql_free_result($result);

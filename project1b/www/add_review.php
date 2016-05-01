@@ -6,9 +6,33 @@
     <?php
     $mid = $_POST["mid"];
     $name = $_POST["name"];
+    $rating = $_POST["rating"];
+    $comment = $_POST["comment"];
 
     if ($_SERVER["REQUEST_METHOD"] === "POST" && !empty($name))
     {
+    	$db = mysql_connect("localhost", "cs143", "");
+        if (!$db)
+            die("Unable to connect to database: " . mysql_error());
+
+        $db_selected = mysql_select_db("CS143", $db);
+        if (!$db_selected)
+            die("Unable to select database: " . mysql_error()); 
+
+    	$mid = (int) $mid;
+    	$name = "'" . mysql_real_escape_string($name) . "'";
+    	$rating = (int) $rating;
+    	if(empty($comment))
+    		$comment = "NULL";
+    	else
+    		$comment = "'" . mysql_real_escape_string($comment) . "'";
+
+    	$query = "INSERT INTO Review (name, time, mid, rating, comment) VALUES (";
+    	$query .= "$name, NOW(), $mid, $rating, $comment)";
+    	if (!$result = mysql_query($query))
+    		die("Error executing query: ". mysql_error()); 
+    	mysql_close($db);
+
         echo "Comment added by $name.\n";
         echo "<hr />";
     }
@@ -31,7 +55,7 @@
             die("Unable to select database: " . mysql_error());
 
         // All movies
-        $query = "SELECT * FROM Movie";
+        $query = "SELECT * FROM Movie ORDER BY title ASC";
         if (!$result = mysql_query($query))
             die("Error executing query: " . mysql_error());
 

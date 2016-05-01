@@ -3,13 +3,17 @@
     <title>CS143 - Project 1B - Search</title>
     <link href="./bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
+<div class="container">
+<body style="background-color:#add8e6">
     <!-- Search for actors/movies -->
-    Search for actors/movies
+    <div class="jumbotron">
+        <h1>CS143 Project 1B</h1>
+        <p>Have you ever seen something so beautiful?</p>
+    </div>
     <form action="./search.php" method="GET">
-        Search:
+        Search for actors/movies:
         <input type="text" name="keyword" />
-        <input type="submit" value="Search" />
+        <input class="btn btn-default" type="submit" value="Search" />
     </form>
     <hr />
 
@@ -85,4 +89,5 @@
     mysql_close($db);
     ?>
 </body>
+</div>
 </html>

@@ -167,7 +167,7 @@
         Tickets Sold: <input type="text" name="tickets" maxlength="11"><br/>
         Total Income: <input type="text" name="income" maxlength="11"><br/>
         <br/>
-        <input type="submit" value="Add movie"/>
+        <input type="submit" class="btn btn-default" value="Add movie"/>
     </form>
 </div>
 </body>

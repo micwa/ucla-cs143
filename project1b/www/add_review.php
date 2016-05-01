@@ -45,7 +45,7 @@
     }
     ?>
 
-    <p>Add new comment:</p>
+    <p>Add new review:</p>
     <form action="./add_review.php" method="POST">
         <?php
         $db = mysql_connect("localhost", "cs143", "");
@@ -61,7 +61,7 @@
         if (!$result = mysql_query($query))
             die("Error executing query: " . mysql_error());
 
-        echo "Movie: <select name=\"mid\">\n";
+        echo "Movie: <select class=\"form-control\" name=\"mid\">\n";
         while ($row = mysql_fetch_assoc($result)) {
             $title = $row["title"];
             $year = $row["year"];
@@ -76,8 +76,12 @@
         mysql_close($db);
         ?>
 
-        Your Name:	<input type="text" name="name" value="Anonymous" maxlength="20"><br/>
-        Rating:	<select name="rating">
+        <div class="row">
+        <div class="col-xs-4">
+        Your Name:	<input type="text" class="form-control" name="name" value="Anonymous" maxlength="20"><br/>
+        </div>
+        </div>
+        Rating:	<select class="form-control" name="rating">
                     <option value="5">5 - Excellent</option>
                     <option value="4">4 - Good</option>
                     <option value="3">3 - Okay</option>
@@ -87,8 +91,8 @@
         <br/>
         Comments: <br/>
         <textarea name="comment" cols="80" rows="10"></textarea>
-        <br/>
-        <input type="submit" value="Add review"/>
+        <br/><br/>
+        <input type="submit" class="btn btn-default" value="Add review"/>
     </form>
 </div>
 </body>

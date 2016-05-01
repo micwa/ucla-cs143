@@ -101,8 +101,8 @@
         Sex: <input type="radio" name="sex" value="Male" checked="true">Male
         <input type="radio" name="sex" value="Female">Female<br />
         Date of Birth:  <input type="text" name="dob"><br />
-        Date of Death:  <input type="text" name="dod"><br />
-        <input type="submit" value="Add person"/>
+        Date of Death:  <input type="text" name="dod"><br /><br />
+        <input type="submit" class="btn btn-default" value="Add person"/>
     </form>
 </div>
 </body>

@@ -70,13 +70,13 @@
         // COMMIT/ROLLBACK TRANSACTION
         if ($commit)
         {
-            echo "Added a person to the database.\n";
+            echo "Added an actor/director to the database.\n";
             echo "<hr />\n";
             mysql_query("COMMIT");
         }
         else
         {
-            echo "Error adding an actor to the database.";
+            echo "Error adding an actor/director to the database.";
             echo "<hr />\n";
             mysql_query("ROLLBACK");
         }

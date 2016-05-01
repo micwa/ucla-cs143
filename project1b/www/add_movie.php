@@ -120,7 +120,7 @@
     }
     else if ($_SERVER["REQUEST_METHOD"] === "POST")
     {
-        echo "Must input at least a title and year. \n";
+        echo "Must input at least a title and year.\n";
         echo "<hr/>\n";
     }
     ?>

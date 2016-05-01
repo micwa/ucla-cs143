@@ -44,3 +44,15 @@ Lauren Yeung
     - show_movie_info.php
     - add_review.php
     - add_movie.php
+
+Improvements for Team Setting
+=============================
+
+For better collaboration, team members are advised to share approaches to using
+sql functions. Many of the queries and techniques to accessing databases were
+very similar in style among the php files. The best thing to do would be
+writing out files that are more isolated first; for example, show_movie_info
+needed the database to have reviews before it could show any results.
+Incremental programming, along with splitting "similar difficulty" files
+between partners, is the best approach. 
+

@@ -56,7 +56,7 @@
         if (!$result = mysql_query($query))
             die("Error executing query: " . mysql_error());
 
-        echo "Movie: <select name=\"mid\">\n";
+        echo "Movie: <select class=\"form-control\" name=\"mid\">\n";
         while ($row = mysql_fetch_assoc($result)) {
             $title = $row["title"];
             $year = $row["year"];
@@ -71,7 +71,7 @@
         if (!$result = mysql_query($query))
             die("Error executing query: " . mysql_error());
 
-        echo "Actor: <select name=\"aid\">\n";
+        echo "Actor: <select class=\"form-control\" name=\"aid\">\n";
         while ($row = mysql_fetch_assoc($result)) {
             $name = "$row[last], $row[first]";
             $aid = $row["id"];
@@ -82,8 +82,13 @@
         mysql_free_result($result);
         mysql_close($db);
         ?>
-        Role: <input type="text" name="role" maxlength="50"/><br />
-        <input type="submit" value="Add relation" />
+        <div class="row">
+        <div class="col-xs-4">
+        Role: <input type="text" class="form-control" name="role" maxlength="50"/>
+        </div>
+        </div>
+        <br />
+        <input type="submit" class="btn btn-default" value="Add relation" />
     </form>
 </body>
 </html>

@@ -1,6 +1,7 @@
 <html>
 <head>
 	<title>CS143 - Project 1B - Add movie</title>
+    <link href="./bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
     <?php

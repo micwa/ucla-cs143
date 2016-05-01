@@ -1,6 +1,7 @@
 <html>
 <head>
     <title>CS143 - Project 1B - Show actor info</title>
+    <link href="./bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
     <!-- Search for actors/movies -->

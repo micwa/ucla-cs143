@@ -44,6 +44,14 @@
             $rot = (int) $rot;
         else
             $rot = "NULL";
+        if (!empty($tickets))
+            $tickets = (int) $tickets;
+        else
+            $tickets = "NULL";
+        if (!empty($income))
+            $income = (int) $income;
+        else
+            $income = "NULL";
 
         // Get id
         $query = "SELECT id FROM MaxMovieID";
@@ -89,14 +97,11 @@
         if (!$result = mysql_query($query))
             $commit = false;
 
-        // Insert Sales (if any)
-        if (!empty($tickets) && !empty($totalIncome))
-        {
-            $query = "INSERT INTO Sales (mid, ticketsSold, totalIncome) VALUES (";
-            $query .= "$id, $tickets, $income)";
-            if (!$result = mysql_query($query))
-                $commit = false;
-        }
+        // Insert Sales
+        $query = "INSERT INTO Sales (mid, ticketsSold, totalIncome) VALUES (";
+        $query .= "$id, $tickets, $income)";
+        if (!$result = mysql_query($query))
+            $commit = false;
 
         // COMMIT/ROLLBACK TRANSACTION
         if ($commit)

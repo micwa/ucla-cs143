@@ -49,8 +49,8 @@
 
     // Movie director
     $query = "SELECT * FROM MovieDirector
-    INNER JOIN Director ON Director.id = MovieDirector.did
-    WHERE mid=" . $mid;
+        INNER JOIN Director ON Director.id = MovieDirector.did
+        WHERE mid=" . $mid;
     if (!$result = mysql_query($query))
         die("Error executing query: " . mysql_error());
     $directors = "Director: ";
@@ -67,8 +67,7 @@
     mysql_free_result($result);
 
     // MovieGenre info
-    $query = "SELECT genre FROM MovieGenre
-              WHERE mid=" . $mid;
+    $query = "SELECT genre FROM MovieGenre WHERE mid=" . $mid;
     $query .= " ORDER BY genre ASC";
     if (!$result = mysql_query($query))
         die("Error executing query: " . mysql_error());
@@ -83,9 +82,10 @@
     echo "$genres<br /> \n";
     mysql_free_result($result);
 
+    echo "<h4>More info:</h4>\n";
+
     // MovieRating info
-    $query = "SELECT imdb,rot FROM MovieRating
-           WHERE mid=" . $mid;
+    $query = "SELECT imdb,rot FROM MovieRating WHERE mid=" . $mid;
     if(!$result = mysql_query($query))
         die("Error executing query: " . mysql_error());
     $row = mysql_fetch_assoc($result);
@@ -99,6 +99,24 @@
         echo "Rotten Tomatoes Rating: $row[rot]/100<br />\n";
     mysql_free_result($result);
 
+    // Sales info
+    $query = "SELECT * FROM Sales WHERE mid=" . $mid;
+    if(!$result = mysql_query($query))
+        die("Error executing query: " . mysql_error());
+    $row = mysql_fetch_assoc($result);
+    $tickets = $row["ticketsSold"];
+    $income = $row["totalIncome"];
+
+     if (is_null($tickets))
+        echo "Tickets Sold: N/A<br />\n";
+    else
+        echo "Tickets Sold: $tickets<br />\n";
+    if (is_null($income))
+        echo "Total Income: N/A<br />\n";
+    else
+        echo "Total Income: $income<br />\n";
+    mysql_free_result($result);
+    //
     // MovieActor info
     $queryMA = "SELECT aid, role, first, last FROM MovieActor
               INNER JOIN Actor ON MovieActor.aid = Actor.id

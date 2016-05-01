@@ -21,8 +21,8 @@ CREATE TABLE Actor (
 
 CREATE TABLE Sales (
     mid INT NOT NULL,
-    ticketsSold INT NOT NULL,
-    totalIncome INT NOT NULL,
+    ticketsSold INT,
+    totalIncome INT,
     -- Each sale for a particular movie is specified by the movie id
     PRIMARY KEY (mid)
  ) ENGINE = InnoDB;

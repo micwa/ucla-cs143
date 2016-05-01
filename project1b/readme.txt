@@ -8,14 +8,14 @@ Input pages:
         - Add an actor/director to the database (Actor, Director)
     - add_movie.php (I2):
         - Add a movie to the database (Movie)
-        - Allows you to associate the added movie with a rating (MovieRating)
-          and one or more genres (MovieGenre)
+        - Allows you to associate the added movie with a rating (MovieRating),
+          sales information (Sales), and one or more genres (MovieGenre)
     - add_review.php (I3):
-        - Add a review to a movie
+        - Add a review to a movie (Review)
     - add_movie_actor.php (I4):
-        - Add a (movie, actor) relation
+        - Add a (movie, actor) relation (MovieActor)
     - add_movie_director.php (I5):
-        - Add a (movie, director) relation
+        - Add a (movie, director) relation (MovieDirector)
 
 Two browsing pages:
     - show_actor_info.php (B1):

@@ -83,8 +83,6 @@ CREATE TABLE Review (
     mid INT NOT NULL,
     rating INT,
     comment VARCHAR(500),
-    -- There is one review per movie per user
-    PRIMARY KEY (name, mid),
     -- rating must be out of 5
     CHECK(rating >= 0 AND rating <= 5)
 ) ENGINE = InnoDB;

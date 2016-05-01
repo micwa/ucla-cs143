@@ -4,6 +4,7 @@
     <link href="./bootstrap.min.css" rel="stylesheet">
 </head>
 <body style="background-color:#add8e6">
+<div class="container">
     <?php
     $first = $_POST["first"];
     $last = $_POST["last"];
@@ -103,5 +104,6 @@
         Date of Death:  <input type="text" name="dod"><br />
         <input type="submit" value="Add person"/>
     </form>
+</div>
 </body>
 </html>

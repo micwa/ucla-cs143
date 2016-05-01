@@ -4,6 +4,7 @@
     <link href="./bootstrap.min.css" rel="stylesheet">
 </head>
 <body style="background-color:#add8e6">
+<div class="container">
     <?php
     $mid = $_POST["mid"];
     $did = $_POST["did"];
@@ -77,5 +78,6 @@
         ?>
         <input type="submit" class="btn btn-default" value="Add relation" />
     </form>
+</div>
 </body>
 </html>

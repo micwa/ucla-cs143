@@ -4,6 +4,7 @@
     <link href="./bootstrap.min.css" rel="stylesheet">
 </head>
 <body style="background-color:#add8e6">
+<div class="container">
     <?php
     $title = $_POST["title"];
     $did = $_POST["did"];
@@ -168,5 +169,6 @@
         <br/>
         <input type="submit" value="Add movie"/>
     </form>
+</div>
 </body>
 </html>

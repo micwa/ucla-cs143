@@ -9,6 +9,7 @@
     </style>
 </head>
 <body style="background-color:lightblue">
+<div class="container">
     <!-- Search for actors/movies -->
     <form action="./search.php" method="GET">
         Search for actors/movies:
@@ -85,5 +86,6 @@
     mysql_free_result($result);
     mysql_close($db);
     ?>
+</div>
 </body>
 </html>

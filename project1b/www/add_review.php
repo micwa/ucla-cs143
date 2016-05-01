@@ -4,6 +4,7 @@
     <link href="./bootstrap.min.css" rel="stylesheet">
 </head>
 <body style="background-color:#add8e6">
+<div class="container">
     <?php
     $mid = $_POST["mid"];
     $name = $_POST["name"];
@@ -89,5 +90,6 @@
         <br/>
         <input type="submit" value="Add review"/>
     </form>
+</div>
 </body>
 </html>
